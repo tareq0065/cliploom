@@ -1,0 +1,3 @@
+provider: generic
+url: https://cliploom.gscodes.dev/auto-updates
+updaterCacheDirName: cliploom-updater
