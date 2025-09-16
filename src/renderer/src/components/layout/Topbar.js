@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 import { CustomDialog } from '../CustomDialog';
 
 export default function Topbar() {
-  const { openFromClipboard, openFromFile, copyToClipboard, saveFile } =
+  const { openFromClipboard, setScreenshot, copyToClipboard, saveFile } =
     useEditor();
 
   return (
@@ -14,21 +14,37 @@ export default function Topbar() {
 
       {/* Right side actions */}
       <div className="flex gap-2">
-        <Button variant="secondary" size="sm" onClick={openFromClipboard}>
-          Open From Copy
+        <Button variant="secondary" size="sm" onClick={() => setScreenshot('')}>
+          Clear
         </Button>
-        <Button variant="secondary" size="sm" onClick={openFromFile}>
-          File
-        </Button>
-        {/*<CustomDialog*/}
-        {/*  trigger={*/}
-        {/*    <Button variant="secondary" size="sm">*/}
-        {/*      File*/}
-        {/*    </Button>*/}
-        {/*  }*/}
-        {/*  title="Open a file"*/}
-        {/*  description="This featrue is not implemented yet."*/}
-        {/*/>*/}
+        <CustomDialog
+          trigger={
+            <Button variant="secondary" size="sm">
+              Open From Clipboard
+            </Button>
+          }
+          title="Open From Clipboard"
+          description="This feature is for premium users only. Please buy the app to use it."
+          showBuyButton={true}
+          showCloseButton={false}
+        />
+        {/*<Button variant="secondary" size="sm" onClick={openFromClipboard}>*/}
+        {/*  Open From Copy*/}
+        {/*</Button>*/}
+        {/*<Button variant="secondary" size="sm" onClick={openFromFile}>*/}
+        {/*  File*/}
+        {/*</Button>*/}
+        <CustomDialog
+          trigger={
+            <Button variant="secondary" size="sm">
+              File
+            </Button>
+          }
+          title="Open a file"
+          description="This feature is for premium users only. Please buy the app to use it."
+          showBuyButton={true}
+          showCloseButton={false}
+        />
         <Button variant="secondary" size="sm" onClick={copyToClipboard}>
           Copy
         </Button>

@@ -2,6 +2,7 @@ import { useEditor } from '../EditorContext';
 import RatioSelector from '../ratio/RatioSelector';
 import { ColorPickerPopover } from '../ColorPickerPopover';
 import { Slider } from '../ui/slider';
+import { Checkbox } from '../ui/checkbox';
 
 export default function Sidebar() {
   const {
@@ -21,6 +22,9 @@ export default function Sidebar() {
     bgColorValue,
     setBgColorValue,
     gradientPresets, // array of gradients from context
+
+    autoBalance,
+    setAutoBalance,
   } = useEditor();
 
   return (
@@ -58,6 +62,20 @@ export default function Sidebar() {
                 step={1}
                 onValueChange={([v]) => setShadow(v)}
               />
+            </div>
+
+            <div className="flex items-center gap-2 pt-2">
+              <Checkbox
+                id="auto-balance"
+                checked={autoBalance}
+                onCheckedChange={(v) => setAutoBalance(Boolean(v))}
+              />
+              <label
+                htmlFor="auto-balance"
+                className="text-sm text-neutral-700 cursor-pointer"
+              >
+                Auto balance (left ↔ right)
+              </label>
             </div>
 
             <div>

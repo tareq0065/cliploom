@@ -10,13 +10,7 @@ ipcRenderer.on('screenshot-data', (_e, dataUrl) => {
 });
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  onEditorVisibility: (cb) =>
-    ipcRenderer.on('editor-visibility-changed', (_, v) => cb(v)),
-  isEditorOpen: () => ipcRenderer.invoke('editor-is-open'),
-  takeFullScreen: () => ipcRenderer.send('menu-fullscreen'),
-  takeRegion: () => ipcRenderer.send('menu-select'),
-  openEditor: () => ipcRenderer.send('open-editor'),
-  quitApp: () => ipcRenderer.send('menu-quit'),
+  openExternal: (url) => ipcRenderer.invoke('open-external', url),
   saveComposedImage: (base64Data, defaultFileName) =>
     ipcRenderer.invoke('save-composed-image', { base64Data, defaultFileName }),
 
@@ -33,12 +27,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     const idx = screenshotListeners.indexOf(callback);
     if (idx !== -1) screenshotListeners.splice(idx, 1);
   },
-  openFromClipboard: () => ipcRenderer.send('menu-open-clipboard'),
-  openFromFile: () => ipcRenderer.send('menu-open-file'),
   preferences: () => ipcRenderer.send('preferences'),
-
-  getLoginItemSettings: () => ipcRenderer.invoke('get-login-item-settings'),
-  setLoginItemSettings: (enable) =>
-    ipcRenderer.invoke('set-login-item-settings', enable),
-  getAppVersion: () => ipcRenderer.invoke('get-app-version'),
 });

@@ -25,6 +25,9 @@ export default function CanvasArea() {
     bgColorValue,
     shadow,
     naturalImageSize,
+
+    imageOffsetX,
+    imageOffsetY,
   } = useEditor();
 
   const parsePx = (v) =>
@@ -165,6 +168,9 @@ export default function CanvasArea() {
     objectFit: 'contain',
     objectPosition: 'center',
     display: 'block',
+    transform: `translate(${imageOffsetX}px, ${imageOffsetY}px)`,
+    transition: 'transform 160ms ease',
+    borderRadius: radius,
   };
 
   return (
